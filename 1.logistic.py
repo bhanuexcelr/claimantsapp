@@ -7,7 +7,7 @@ Created on Thu Sep 24 13:01:17 2020
 import pandas as pd
 import streamlit as st 
 from sklearn.linear_model import LogisticRegression
-import pickle as pickle
+#import pickle as pickle
 
 st.title('Model Deployment: Logistic Regression')
 
@@ -31,19 +31,19 @@ df = user_input_features()
 st.subheader('User Input parameters')
 st.write(df)
 
-#claimants = pd.read_csv("claimants.csv")
-#claimants.drop(["CASENUM"],inplace=True,axis = 1)
-#claimants = claimants.dropna()
+claimants = pd.read_csv("claimants.csv")
+claimants.drop(["CASENUM"],inplace=True,axis = 1)
+claimants = claimants.dropna()
 
-#X = claimants.iloc[:,1:]
-#Y = claimants.iloc[:,0]
-#clf = LogisticRegression()
-#clf.fit(X,Y)
+X = claimants.iloc[:,1:]
+Y = claimants.iloc[:,0]
+clf = LogisticRegression()
+clf.fit(X,Y)
 
-loaded_model=pickle.load(open('Logistic_Model.SAV','rb'))
+#loaded_model=pickle.load(open('Logistic_Model.SAV','rb'))
 
-prediction = loaded_model.predict(df)
-prediction_proba = loaded_model.predict_proba(df)
+prediction = clf.predict(df)
+prediction_proba = clf.predict_proba(df)
 
 st.write(prediction_proba[0])
 
